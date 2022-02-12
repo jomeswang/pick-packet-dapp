@@ -1,9 +1,4 @@
-# Your MWA
-
-## Prerequisites
-
-1. [Node.js LTS](https://github.com/nodejs/Release)
-    * [Automatically call nvm use](https://github.com/nvm-sh/nvm#deeper-shell-integration)
+# pick-packet-dapp 一个接财宝的dapp应用
 
 ## Get Started
 
