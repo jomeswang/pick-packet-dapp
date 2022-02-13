@@ -1,23 +1,27 @@
 import { useContext } from 'react';
-import { Button, Dialog } from 'antd-mobile';
+import { Dialog } from 'antd-mobile';
 import { useHistory } from '@modern-js/runtime/router';
 import { GlobalContext } from '@/context/globalContext';
 
-const Info = () => {
+import './index.less';
+
+const Index = () => {
   const GlobalValue = useContext(GlobalContext);
   console.log('GlobalValue', GlobalValue);
   const history = useHistory();
   return (
-    <div className="text-green-400">
-      <div className="flex flex-col w-2/3 m-auto mt-72">
-        <div className="text-center text-2xl mb-10">PICK-PACkET-DAPP</div>
-        <Button
+    <div>
+      <div className="flex flex-col w-2/3 m-auto ">
+        <div className="title mb-10"></div>
+        <div
+          className="index-btn"
           onClick={() => {
             history.push('/info');
           }}>
           开始游戏
-        </Button>
-        <Button
+        </div>
+        <div
+          className="index-btn"
           onClick={() =>
             Dialog.alert({
               content: '这是一个弹窗会让用户选择游戏难度',
@@ -27,8 +31,9 @@ const Info = () => {
             })
           }>
           游戏设置
-        </Button>
-        <Button
+        </div>
+        <div
+          className="index-btn"
           onClick={() =>
             Dialog.alert({
               content: '这是一个弹窗解释说明游戏玩法',
@@ -38,16 +43,17 @@ const Info = () => {
             })
           }>
           游戏说明
-        </Button>
-        <Button
+        </div>
+        <div
+          className="index-btn"
           onClick={() => {
             history.push('/range');
           }}>
           排行榜
-        </Button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Info;
+export default Index;
