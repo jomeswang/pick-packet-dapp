@@ -1,9 +1,83 @@
-#mammon {
-  background-image: url("@/assets/images/mammon.png");
+.base-img(@img) {
+  background-image: url(@img);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
   width: 150px;
   height: 150px;
   position: absolute;
+}
+
+#mammon {
+  .base-img("@/assets/images/mammon.png");
+  bottom: 20%;
+  left: calc(50% - 75px);
+  z-index: 2;
+}
+
+.drop {
+  will-change: transform;
+}
+
+.packet {
+  .base-img("@/assets/images/packet.png");
+  width: 50px;
+  height: 60px;
+}
+
+.bump {
+  .base-img("@/assets/images/bump.png");
+  width: 66px;
+  height: 66px;
+}
+
+.yuanbao {
+  .base-img("@/assets/images/yuanbao.png");
+  width: 70px;
+  height: 48px;
+}
+
+.bian {
+  .base-img("@/assets/images/bian.png");
+  width: 55.6px;
+  height: 49px;
+}
+
+.crash-animation {
+  position: absolute;
+  z-index: 3;
+  width: 150px;
+  height: 150px;
+  will-change: transform;
+}
+
+.c-5 {
+  .base-img("@/assets/images/5.png");
+  width: 60px;
+  height: 40px;
+}
+
+.c-5- {
+  .base-img("@/assets/images/5-.png");
+  width: 60px;
+  height: 40px;
+}
+
+.c-10 {
+  .base-img("@/assets/images/10.png");
+  width: 80px;
+  height: 40px;
+}
+
+.info-data {
+  position: absolute;
+  left: 0px;
+  bottom: 100px;
+
+  .time {
+    
+  }
+  .record {
+
+  }
 }

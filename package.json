@@ -40,7 +40,9 @@
   "dependencies": {
     "@modern-js/plugin-less": "^1.2.1",
     "@modern-js/runtime": "^1.0.0",
+    "@tweenjs/tween.js": "^18",
     "antd-mobile": "^5.0.0-rc.26",
+    "lottie-web": "^5.8.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "tailwindcss": "^2.2.19"

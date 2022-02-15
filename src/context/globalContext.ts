@@ -1,7 +1,9 @@
 import { createContext } from 'react';
 
-const globalValue = {
-  name: '',
+export const globalInitValue = {
+  difficulty: 2,
+  time: 60,
+  record: 0,
 };
 
-export const GlobalContext = createContext(globalValue);
+export const GlobalContext = createContext(globalInitValue);
