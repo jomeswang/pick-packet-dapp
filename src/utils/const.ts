@@ -15,3 +15,18 @@ export const DIFFICULTY_SETTINGS = [
     speed: 1.3,
   },
 ];
+
+export const MATERIAL_ANIMATION_MAP = {
+  packet: {
+    className: 'c-5',
+    record: +5,
+  },
+  yuanbao: {
+    className: 'c-10',
+    record: +10,
+  },
+  bian: {
+    className: 'c-5-',
+    record: -5,
+  },
+};

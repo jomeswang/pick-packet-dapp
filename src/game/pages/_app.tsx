@@ -11,12 +11,18 @@ const App = ({ Component, ...pageProps }: { Component: ComponentType }) => {
   const [record, setRecord] = useState(globalInitValue.record);
   return (
     <GlobalContext.Provider
-      value={{ difficulty, setDifficulty, time, setTime, record, setRecord }}>
+      value={{
+        difficulty,
+        setDifficulty,
+        time,
+        setTime,
+        record,
+        setRecord,
+      }}>
       <div className="bg">
         <Component {...pageProps} />
       </div>
     </GlobalContext.Provider>
   );
 };
-
 export default App;
