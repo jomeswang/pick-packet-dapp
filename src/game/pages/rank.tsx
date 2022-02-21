@@ -1,12 +1,17 @@
 import './rank.less';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Toast } from 'antd-mobile';
 
 const Rank = () => {
   const [records, setRecords] = useState<{ name: string; record: string }[]>(
     [],
   );
   useEffect(() => {
+    Toast.show({
+      icon: 'loading',
+      content: '加载中',
+    });
     axios
       .get('https://qcw93z.api.cloudendpoint.cn/getRecordsRank')
       // eslint-disable-next-line promise/prefer-await-to-then
@@ -24,7 +29,7 @@ const Rank = () => {
           </span>
           {item.name}
         </div>
-        <div className="float-left">-------------------------</div>
+        <div className="float-left pr-3">-----------------------------</div>
         <div className="rank-record float-right">{item.record}</div>
       </div>
     ));

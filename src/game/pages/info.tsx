@@ -8,18 +8,23 @@ import {
   Dispatch,
   SetStateAction,
 } from 'react';
-import { useHistory, RouterProps } from '@modern-js/runtime/router';
+import { useHistory } from '@modern-js/runtime/router';
 import Lottie from 'lottie-web';
 import { Tween, Easing, update } from '@tweenjs/tween.js';
 import { Dialog, Input, Toast } from 'antd-mobile';
 import { DialogShowProps } from 'antd-mobile/es/components/dialog';
-import axios from 'axios';
 import {
   getRandomInWindowWidth,
   getRandomInRange,
   judgeRectCrash,
+  drawNFT,
+  backToIndex,
 } from '@/utils/utils';
-import { GlobalContext, globalInitValue } from '@/context/globalContext';
+import {
+  GlobalContext,
+  globalInitValue,
+  GlobalContextType,
+} from '@/context/globalContext';
 import AliasRandom from '@/utils/aliasRandom';
 import { DIFFICULTY_SETTINGS, MATERIAL_ANIMATION_MAP } from '@/utils/const';
 import BumpAnimateData from '@/assets/json/bump.json';
@@ -27,14 +32,7 @@ import BumpAnimateData from '@/assets/json/bump.json';
 type Dict = { [k: string]: any };
 
 type InitType = {
-  globalContext: {
-    difficulty: any;
-    time?: number;
-    record?: number;
-    setDifficulty?: any;
-    setTime?: any;
-    setRecord?: any;
-  };
+  globalContext: GlobalContextType;
   setTime?: any;
   setRecord: Dispatch<SetStateAction<number>>;
   raf: { requestAnimationFrame: any; cancelAnimationFrame: any };
@@ -156,8 +154,8 @@ const detectCrashAction = (ele: HTMLDivElement, setRecord: any) => {
 
     // 给物料添加放大缩写退出动画
     const match: MatchType = /packet|yuanbao|bian/.exec(
-      ele.className,
-    ) as MatchType;
+      ele.className
+    ) as unknown as MatchType;
     if (match) {
       crashAnimationEle.classList.add(MATERIAL_ANIMATION_MAP[match].className);
       TweenReverseWrap(crashAnimationEle, true);
@@ -229,25 +227,20 @@ const InfoData = ({ time = 0, record = 0 }) => (
   </div>
 );
 
-// 返回首页的封装
-const backToIndex = (history: RouterProps['history']) => {
-  history.replace('/');
-  const crashAnimationEles = document.getElementsByClassName('crash-animation');
-  Array.from(crashAnimationEles).forEach(ele =>
-    ele?.parentNode?.removeChild(ele),
-  );
-};
-
 // 游戏结束弹窗
 const GameOver = (props: InitType) => {
   ContextValue.stop = true;
   let name = '';
+  const recordc = Number(
+    document.getElementsByClassName('base-data')[1].innerHTML.split('：')[1],
+  );
+  props.globalContext.record = recordc;
   const config: DialogShowProps = {
     header: <div>游戏结束</div>,
     content: (
       <div>
-        <div>你的游戏分数为：55</div>
-        <div>请留下你的大名，方便在排行榜中展示</div>
+        <div>你的游戏分数为：{recordc}</div>
+        <div>请留下你的大名，方便在NFT中展示</div>
         <Input
           placeholder="请输入名字"
           className="name-input"
@@ -282,20 +275,7 @@ const GameOver = (props: InitType) => {
               icon: 'loading',
               content: '保存中',
             });
-            props.setRecord(record => {
-              Toast.show({
-                icon: 'success',
-                content: '保存成功',
-              });
-              backToIndex(props.history);
-              axios.post('https://qcw93z.api.cloudendpoint.cn/addRecord', {
-                data: {
-                  name,
-                  record,
-                },
-              });
-              return record;
-            });
+            drawNFT(props.globalContext, name, props.history);
           },
         },
       ],
@@ -347,7 +327,7 @@ const init = ({
         timet = timec - 1;
         return timet;
       });
-      if (timet <= 50) {
+      if (timet <= 0) {
         // 取消所有动画
         raf.cancelAnimationFrame();
         GameOver({
@@ -372,7 +352,8 @@ const Info = () => {
   const globalContext = useContext(GlobalContext);
   const history = useHistory();
   const [time, setTime] = useState(globalContext.time);
-  const [record, setRecord] = useState(globalContext.record);
+  // const [record, setRecord] = useState(globalContext.record);
+  const { record, setRecord } = globalContext;
   const raf = rafWrapper();
   // 使用 alias method产生随机掉落的物料
   const voseAliasMethod = useMemo(

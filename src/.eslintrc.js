@@ -6,5 +6,6 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'eslint-comments/no-unused-disable': 'off',
     'eslint-comments/disable-enable-pair': 'off',
+    'eslint-comments/no-unlimited-disable': 'off',
   },
 };

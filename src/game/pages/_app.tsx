@@ -9,6 +9,8 @@ const App = ({ Component, ...pageProps }: { Component: ComponentType }) => {
   const [difficulty, setDifficulty] = useState(globalInitValue.difficulty);
   const [time, setTime] = useState(globalInitValue.time);
   const [record, setRecord] = useState(globalInitValue.record);
+  const [address, setAddress] = useState('');
+  const [provider, setProvider] = useState(null as any);
   return (
     <GlobalContext.Provider
       value={{
@@ -18,6 +20,10 @@ const App = ({ Component, ...pageProps }: { Component: ComponentType }) => {
         setTime,
         record,
         setRecord,
+        address,
+        setAddress,
+        provider,
+        setProvider,
       }}>
       <div className="bg">
         <Component {...pageProps} />

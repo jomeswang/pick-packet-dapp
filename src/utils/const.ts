@@ -30,3 +30,5 @@ export const MATERIAL_ANIMATION_MAP = {
     record: -5,
   },
 };
+
+export const CONTRACT_ADDRESS = '0xE175C3a7d7Cfc93d7a242917D22f2F8B6e120951';
