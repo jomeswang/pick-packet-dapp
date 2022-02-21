@@ -1,0 +1,24 @@
+.range-block {
+  color: green;
+}
+
+.base-img(@img) {
+  background-image: url(@img);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  width: 150px;
+  height: 150px;
+}
+
+.rank-title {
+  .base-img("@/assets/images/rank.png");
+  width: 258px;
+  height: 80px;
+  margin: 50px auto;
+}
+
+.rank-body {
+  color: #fedaaf;
+  font-size: 18px;
+}
